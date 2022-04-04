@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/action_ordenar"
+        android:title="@string/ordenar"/>
+
+    <item android:id="@+id/action_valoravida"
+        android:title="@string/valorvida"/>
+
+    <item android:id="@+id/fechas"
+        android:title="@string/fechas"/>
+
+    <item android:id="@+id/setting"
+        android:title="@string/setting"/>
+
+    <item android:id="@+id/about"
+        android:title="@string/about"/>
+</menu>
