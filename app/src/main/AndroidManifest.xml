@@ -9,6 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PracticaFinalV1">
+
+        <activity
+            android:name=".LogIn.Tabla"
+            android:exported="true" />
+        <activity
+            android:name=".LogIn.RegisterActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LogIn.LoginActivity"
+            android:exported="true" />
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
