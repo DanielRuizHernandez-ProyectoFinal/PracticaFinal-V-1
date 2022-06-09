@@ -23,17 +23,17 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
     }
 
+    //Login
     @Override
     protected void onStart() {
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
-        if (user == null){
+        if (user == null) {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        }else{
+        } else {
             startActivity(new Intent(MainActivity.this, Tabla.class));
         }
     }
-
 
 
 }

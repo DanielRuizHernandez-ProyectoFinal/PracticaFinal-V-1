@@ -47,41 +47,33 @@ public class LoginActivity extends AppCompatActivity {
             userLogin();
         });
 
-        lblRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openRegisterActivity();
-            }
-        });
+        lblRegister.setOnClickListener(view -> openRegisterActivity());
 
-    }//End onCreate
+    }
 
     public void openRegisterActivity() {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
-    }// End openRegisterActivity
+    }
 
-    public void userLogin(){
+    public void userLogin() {
         String mail = txtMail.getText().toString();
         String password = txtPassword.getEditText().getText().toString();
 
-        if (TextUtils.isEmpty(mail)){
+        if (TextUtils.isEmpty(mail)) {
             txtMail.setError("Ingrese un correo");
             txtMail.requestFocus();
-        }else if (TextUtils.isEmpty(password)){
+        } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(LoginActivity.this, "Ingrese una contraseña", Toast.LENGTH_SHORT).show();
             txtPassword.requestFocus();
-        }else{
+        } else {
 
-            mAuth.signInWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()){
-                        Toast.makeText(LoginActivity.this, "Bienvenid@", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, Tabla.class));
-                    }else {
-                        Log.w("TAG", "Error:", task.getException());
-                    }
+            mAuth.signInWithEmailAndPassword(mail, password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(LoginActivity.this, "Bienvenid@", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, Tabla.class));
+                } else {
+                    Log.w("TAG", "Error:", task.getException());
                 }
             });
 

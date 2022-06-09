@@ -12,7 +12,6 @@ import net.iessochoa.danielruizhernandez.practicafinal_v_1.R;
 public class Tabla extends Activity {
 
 
-
     private Button btnSalir;
 
     private FirebaseAuth mAuth;
@@ -33,6 +32,6 @@ public class Tabla extends Activity {
 
         });
 
-    }//End onCreate
+    }
 
 }

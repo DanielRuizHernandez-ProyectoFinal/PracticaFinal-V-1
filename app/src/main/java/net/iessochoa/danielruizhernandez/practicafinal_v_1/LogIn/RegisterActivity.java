@@ -63,69 +63,55 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
-        lblLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openLoginActivity();
-            }
-        });
+        lblLogin.setOnClickListener(view -> openLoginActivity());
 
-    }//End onCreate
-
+    }
 
 
     public void openLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-    }// End openLoginActivity
+    }
 
-    public void createuser(){
+    public void createuser() {
 
         String name = txtUser.getText().toString();
         String mail = txtMail.getText().toString();
         String phone = txtPhone.getText().toString();
         String password = txtPassword.getEditText().getText().toString();
 
-        if (TextUtils.isEmpty(name)){
+        if (TextUtils.isEmpty(name)) {
             txtMail.setError("Ingrese un Nombre");
             txtMail.requestFocus();
-        }else if (TextUtils.isEmpty(mail)){
+        } else if (TextUtils.isEmpty(mail)) {
             txtMail.setError("Ingrese un Correo");
             txtMail.requestFocus();
-        }else if (TextUtils.isEmpty(phone)){
+        } else if (TextUtils.isEmpty(phone)) {
             txtMail.setError("Ingrese un Teléfono");
             txtMail.requestFocus();
-        }else if (TextUtils.isEmpty(password)){
+        } else if (TextUtils.isEmpty(password)) {
             txtMail.setError("Ingrese una Contraseña");
             txtMail.requestFocus();
-        }else {
+        } else {
 
-            mAuth.createUserWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()){
-                        userID = mAuth.getCurrentUser().getUid();
-                        DocumentReference documentReference = db.collection("users").document(userID);
+            mAuth.createUserWithEmailAndPassword(mail, password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    userID = mAuth.getCurrentUser().getUid();
+                    DocumentReference documentReference = db.collection("users").document(userID);
 
-                        Map<String,Object> user=new HashMap<>();
-                        user.put("Nombre", name);
-                        user.put("Correo", mail);
-                        user.put("Teléfono", phone);
-                        user.put("Contraseña", password);
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("Nombre", name);
+                    user.put("Correo", mail);
+                    user.put("Teléfono", phone);
+                    user.put("Contraseña", password);
 
-                        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Log.d("TAG", "onSuccess: Datos registrados"+userID);
-                            }
-                        });
-                        Toast.makeText(RegisterActivity.this, "Usuario Registrado", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                    }else {
-                        Toast.makeText(RegisterActivity.this, "Usuario no registrado"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
+                    documentReference.set(user).addOnSuccessListener(unused -> Log.d("TAG", "onSuccess: Datos registrados" + userID));
+                    Toast.makeText(RegisterActivity.this, "Usuario Registrado", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Usuario no registrado" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
+
             });
 
         }
