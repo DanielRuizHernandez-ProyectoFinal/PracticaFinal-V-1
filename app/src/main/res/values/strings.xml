@@ -5,4 +5,5 @@
     <string name="fechas">fechas</string>
     <string name="setting">setting</string>
     <string name="about">about</string>
+    <string name="logout">logOut</string>
 </resources>
