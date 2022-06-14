@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toolbar;
@@ -18,7 +19,6 @@ import net.iessochoa.danielruizhernandez.practicafinal_v_1.R;
 public class Tabla extends AppCompatActivity {
 
 
-    private Button btnSalir;
     private FirebaseAuth mAuth;
 
     @Override
@@ -27,23 +27,14 @@ public class Tabla extends AppCompatActivity {
         setContentView(R.layout.activity_tabla);
 
 
-        btnSalir = findViewById(R.id.btnSalir);
 
         mAuth = FirebaseAuth.getInstance();
 
-        btnSalir.setOnClickListener(view -> {
-            mAuth.signOut();
-            startActivity(new Intent(this, LoginActivity.class));
-
-        });
 
 
-        Toolbar toolbar= (Toolbar) findViewById(R.id.tbTabla);
-        setSupportActionBar(toolbar);
 
-    }
 
-    private void setSupportActionBar(Toolbar toolbar) {
+
     }
 
     @Override
@@ -51,14 +42,18 @@ public class Tabla extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.itLogOut:
                 mAuth.signOut();
-                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                break;
+            case R.id.itEditarPerfil:
+                break;
         }
         return true;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.menu_main,menu);
         return true;
     }
 }
