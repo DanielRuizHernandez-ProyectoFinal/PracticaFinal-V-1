@@ -20,6 +20,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -115,6 +121,51 @@ public class RegisterActivity extends AppCompatActivity {
             });
 
         }
+    }
+
+
+    private void isUser(){
+
+        String userUsuario=txtUser.getEditableText().toString().trim();
+        String userContrasenya=txtUser.getEditableText().toString().trim();
+
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("users");
+
+        Query checkUser=reference.orderByChild("Nombre").equalTo(userUsuario);
+
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+
+                    String contrasenyaDB=snapshot.child(userUsuario).child("Contraseña").getValue(String.class);
+
+                    if (contrasenyaDB.equals(userContrasenya)){
+
+                        String nombreDB=snapshot.child(userUsuario).child("Nombre").getValue(String.class);
+                        String correoDB=snapshot.child(userUsuario).child("Correo").getValue(String.class);
+                        String telefonoDB=snapshot.child(userUsuario).child("Teléfono").getValue(String.class);
+
+                        Intent intent = new Intent(getApplicationContext(),EditProfileActivity.class);
+
+                        intent.putExtra("Nombre",nombreDB);
+                        intent.putExtra("Contraseña",contrasenyaDB);
+                        intent.putExtra("Correo",correoDB);
+                        intent.putExtra("Teléfono",telefonoDB);
+
+                        startActivity(intent);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 
 }
