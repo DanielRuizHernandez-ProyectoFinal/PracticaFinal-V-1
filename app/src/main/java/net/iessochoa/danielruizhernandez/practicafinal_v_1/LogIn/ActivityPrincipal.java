@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.R;
 
-public class Tabla extends AppCompatActivity {
+public class ActivityPrincipal extends AppCompatActivity {
 
 
     private FirebaseAuth mAuth;
@@ -45,6 +45,8 @@ public class Tabla extends AppCompatActivity {
                 finish();
                 break;
             case R.id.itEditarPerfil:
+                Intent intent = new Intent(this, EditProfileActivity.class);
+                startActivity(intent);
                 break;
         }
         return true;

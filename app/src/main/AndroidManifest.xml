@@ -10,8 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PracticaFinalV1">
 
+        <activity android:name=".LogIn.EditProfileActivity"
+            android:exported="true"/>
+
         <activity
-            android:name=".LogIn.Tabla"
+            android:name=".LogIn.ActivityPrincipal"
             android:exported="true" />
         <activity
             android:name=".LogIn.RegisterActivity"
@@ -19,7 +22,6 @@
         <activity
             android:name=".LogIn.LoginActivity"
             android:exported="true" />
-
 
         <activity
             android:name=".MainActivity"
