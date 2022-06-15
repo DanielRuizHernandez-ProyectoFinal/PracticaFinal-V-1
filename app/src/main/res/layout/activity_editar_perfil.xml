@@ -73,4 +73,40 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/etNombre"
+        app:layout_constraintEnd_toStartOf="@+id/etNombre"
+        app:layout_constraintTop_toTopOf="@+id/etNombre"
+        app:srcCompat="@drawable/custom_person_icon" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/etCorreo"
+        app:layout_constraintEnd_toStartOf="@+id/etCorreo"
+        app:layout_constraintTop_toTopOf="@+id/etCorreo"
+        app:srcCompat="@drawable/custom_email_icon" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/etTelefono"
+        app:layout_constraintEnd_toStartOf="@+id/etTelefono"
+        app:layout_constraintTop_toTopOf="@+id/etTelefono"
+        app:srcCompat="@drawable/custom_phone_icon" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/etContrasenya"
+        app:layout_constraintEnd_toStartOf="@+id/etContrasenya"
+        app:layout_constraintTop_toTopOf="@+id/etContrasenya"
+        app:srcCompat="@drawable/ic_lock" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

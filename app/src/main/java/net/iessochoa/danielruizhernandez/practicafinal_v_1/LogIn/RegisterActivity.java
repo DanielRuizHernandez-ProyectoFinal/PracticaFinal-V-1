@@ -70,7 +70,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         lblLogin.setOnClickListener(view -> openLoginActivity());
-
     }
 
 
@@ -122,50 +121,4 @@ public class RegisterActivity extends AppCompatActivity {
 
         }
     }
-
-
-    private void isUser(){
-
-        String userUsuario=txtUser.getEditableText().toString().trim();
-        String userContrasenya=txtUser.getEditableText().toString().trim();
-
-        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("users");
-
-        Query checkUser=reference.orderByChild("Nombre").equalTo(userUsuario);
-
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-
-                    String contrasenyaDB=snapshot.child(userUsuario).child("Contraseña").getValue(String.class);
-
-                    if (contrasenyaDB.equals(userContrasenya)){
-
-                        String nombreDB=snapshot.child(userUsuario).child("Nombre").getValue(String.class);
-                        String correoDB=snapshot.child(userUsuario).child("Correo").getValue(String.class);
-                        String telefonoDB=snapshot.child(userUsuario).child("Teléfono").getValue(String.class);
-
-                        Intent intent = new Intent(getApplicationContext(),EditProfileActivity.class);
-
-                        intent.putExtra("Nombre",nombreDB);
-                        intent.putExtra("Contraseña",contrasenyaDB);
-                        intent.putExtra("Correo",correoDB);
-                        intent.putExtra("Teléfono",telefonoDB);
-
-                        startActivity(intent);
-
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-    }
-
 }
