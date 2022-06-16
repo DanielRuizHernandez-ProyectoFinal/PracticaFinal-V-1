@@ -92,28 +92,9 @@ public class EditProfileActivity extends AppCompatActivity {
     }
     private void updateData(String nombre, String correo, String telefono, String contrasenya) {
 
-       /*
-       HashMap user= new HashMap();
-        user.put("Nombre",nombre);
-        user.put("Correo",correo);
-        user.put("Teléfono",telefono);
-        user.put("Contraseña",contrasenya);
-
-        */
-
-
-      //  mDatabase=FirebaseDatabase.getInstance().getReference("users");
-      //  mDatabase.child(userId).child("Nombre").setValue(nombre);
-
-      //  DatabaseReference reference ;
-        //reference=FirebaseDatabase.getInstance().getReference("users");
-       // reference.child("users").child(userId).child("Nombre").setValue(nombre);
-
-
 
         fStore= FirebaseFirestore.getInstance();
 
-        Usuario usuarioTemporal= new Usuario(nombre,correo,contrasenya,telefono);
 
         fStore.collection("users").document(userId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
