@@ -105,10 +105,10 @@ public class RegisterActivity extends AppCompatActivity {
                     DocumentReference documentReference = db.collection("users").document(userID);
 
                     Map<String, Object> user = new HashMap<>();
-                    user.put("Nombre", name);
-                    user.put("Correo", mail);
-                    user.put("Teléfono", phone);
-                    user.put("Contraseña", password);
+                    user.put("nombre", name);
+                    user.put("correo", mail);
+                    user.put("teléfono", phone);
+                    user.put("contraseña", password);
 
                     documentReference.set(user).addOnSuccessListener(unused -> Log.d("TAG", "onSuccess: Datos registrados" + userID));
                     Toast.makeText(RegisterActivity.this, "Usuario Registrado", Toast.LENGTH_SHORT).show();

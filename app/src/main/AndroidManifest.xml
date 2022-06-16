@@ -15,13 +15,15 @@
 
         <activity
             android:name=".LogIn.ActivityPrincipal"
-            android:exported="true" />
+            android:exported="true"
+            android:label="DnD Administrador"/>
         <activity
             android:name=".LogIn.RegisterActivity"
             android:exported="true" />
         <activity
             android:name=".LogIn.LoginActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
         <activity
             android:name=".MainActivity"

@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,6 +29,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import net.iessochoa.danielruizhernandez.practicafinal_v_1.Model.Usuario;
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.R;
 
 import java.util.HashMap;
@@ -37,7 +39,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
     private DatabaseReference mDatabase;
-    private Button btGuardar;
+    private Button btGuardar , btSalir;
     private EditText etNombre, etCorreo, etTelefono, etContrasenya;
     String userId;
 
@@ -63,10 +65,10 @@ public class EditProfileActivity extends AppCompatActivity {
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                etNombre.setText(documentSnapshot.getString("Nombre"));
-                etCorreo.setText(documentSnapshot.getString("Correo"));
-                etTelefono.setText(documentSnapshot.getString("Teléfono"));
-                etContrasenya.setText(documentSnapshot.getString("Contraseña"));
+                etNombre.setText(documentSnapshot.getString("nombre"));
+                etCorreo.setText(documentSnapshot.getString("correo"));
+                etTelefono.setText(documentSnapshot.getString("teléfono"));
+                etContrasenya.setText(documentSnapshot.getString("contraseña"));
             }
         });
 
@@ -81,12 +83,17 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 updateData(nombre,correo,telefono,contrasenya);
 
+                fStore.getInstance().collection("users");
+
             }
         });
+
+
     }
     private void updateData(String nombre, String correo, String telefono, String contrasenya) {
 
-       /* HashMap user= new HashMap();
+       /*
+       HashMap user= new HashMap();
         user.put("Nombre",nombre);
         user.put("Correo",correo);
         user.put("Teléfono",telefono);
@@ -98,9 +105,38 @@ public class EditProfileActivity extends AppCompatActivity {
       //  mDatabase=FirebaseDatabase.getInstance().getReference("users");
       //  mDatabase.child(userId).child("Nombre").setValue(nombre);
 
-        DatabaseReference reference ;
+      //  DatabaseReference reference ;
         //reference=FirebaseDatabase.getInstance().getReference("users");
        // reference.child("users").child(userId).child("Nombre").setValue(nombre);
+
+
+
+        fStore= FirebaseFirestore.getInstance();
+
+        Usuario usuarioTemporal= new Usuario(nombre,correo,contrasenya,telefono);
+
+        fStore.collection("users").document(userId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                Usuario usuarioActual = documentSnapshot.toObject(Usuario.class);
+
+                usuarioActual.setNombre(nombre);
+                usuarioActual.setCorreo(correo);
+                usuarioActual.setContraseña(contrasenya);
+                usuarioActual.setTeléfono(telefono);
+
+                fStore.collection("users").document(userId).set(usuarioActual).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            Toast.makeText(EditProfileActivity.this, "Cambios guardados", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+            }
+        });
 
 
 
