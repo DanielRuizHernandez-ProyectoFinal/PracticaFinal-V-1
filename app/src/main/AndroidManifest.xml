@@ -11,7 +11,8 @@
         android:theme="@style/Theme.PracticaFinalV1">
 
         <activity android:name=".LogIn.EditProfileActivity"
-            android:exported="true"/>
+            android:exported="true"
+            android:label="Editar perfil"/>
 
         <activity
             android:name=".LogIn.ActivityPrincipal"

@@ -53,6 +53,7 @@ public class EditProfileActivity extends AppCompatActivity {
         etTelefono = findViewById(R.id.etTelefono);
         etContrasenya = findViewById(R.id.etContrasenya);
         btGuardar=findViewById(R.id.btGuardar);
+        btSalir=findViewById(R.id.btSalir);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -87,6 +88,14 @@ public class EditProfileActivity extends AppCompatActivity {
 
             }
         });
+
+        btSalir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
 
     }
