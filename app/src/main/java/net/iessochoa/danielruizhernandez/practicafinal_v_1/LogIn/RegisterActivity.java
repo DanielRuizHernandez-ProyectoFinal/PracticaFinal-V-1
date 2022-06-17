@@ -99,6 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
             txtMail.requestFocus();
         } else {
 
+
             mAuth.createUserWithEmailAndPassword(mail, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     userID = mAuth.getCurrentUser().getUid();

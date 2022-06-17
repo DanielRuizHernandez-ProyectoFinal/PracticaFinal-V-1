@@ -11,6 +11,7 @@
         android:theme="@style/Theme.PracticaFinalV1">
 
        <activity android:name=".LogIn.NuevoPersonajeActivity"
+           android:label="Creacion de personaje"
            />
 
         <activity

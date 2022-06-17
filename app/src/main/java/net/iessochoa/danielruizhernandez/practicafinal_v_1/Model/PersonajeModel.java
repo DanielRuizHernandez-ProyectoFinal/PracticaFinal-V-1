@@ -2,21 +2,31 @@ package net.iessochoa.danielruizhernandez.practicafinal_v_1.Model;
 
 public class PersonajeModel {
 
+    String nombre;
     String clase;
     String raza ;
-    String conjuros;
+    String nivel;
     String inventario;
-    String id ;
+
 
     public PersonajeModel() {
     }
 
-    public PersonajeModel(String clase, String raza, String conjuros, String inventario, String id) {
+
+    public PersonajeModel(String nombre, String clase, String raza, String nivel, String inventario) {
+        this.nombre = nombre;
         this.clase = clase;
         this.raza = raza;
-        this.conjuros = conjuros;
+        this.nivel = nivel;
         this.inventario = inventario;
-        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getClase() {
@@ -35,12 +45,12 @@ public class PersonajeModel {
         this.raza = raza;
     }
 
-    public String getConjuros() {
-        return conjuros;
+    public String getNivel() {
+        return nivel;
     }
 
-    public void setConjuros(String conjuros) {
-        this.conjuros = conjuros;
+    public void setNivel(String nivel) {
+        this.nivel = nivel;
     }
 
     public String getInventario() {
@@ -49,13 +59,5 @@ public class PersonajeModel {
 
     public void setInventario(String inventario) {
         this.inventario = inventario;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 }
