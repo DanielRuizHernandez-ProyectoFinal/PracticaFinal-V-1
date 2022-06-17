@@ -12,6 +12,7 @@ import android.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.R;
@@ -20,21 +21,28 @@ public class ActivityPrincipal extends AppCompatActivity {
 
 
     private FirebaseAuth mAuth;
+    FloatingActionButton btAnyadir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tabla);
-
-
+        setContentView(R.layout.activity_recycler_view);
 
         mAuth = FirebaseAuth.getInstance();
 
+        btAnyadir=findViewById(R.id.fabAnyadir);
+
+
+        btAnyadir.setOnClickListener(e-> nuevoPersonaje());
 
 
 
 
+    }
 
+    private void nuevoPersonaje() {
+        Intent i = new Intent(this,NuevoPersonajeActivity.class);
+        startActivity(i);
     }
 
     @Override
