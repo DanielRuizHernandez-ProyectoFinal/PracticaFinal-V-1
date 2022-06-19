@@ -2,6 +2,7 @@ package net.iessochoa.danielruizhernandez.practicafinal_v_1.LogIn;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Person;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 
+import net.iessochoa.danielruizhernandez.practicafinal_v_1.Model.Personaje;
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.R;
 
 import java.util.HashMap;
@@ -41,6 +43,10 @@ public class NuevoPersonajeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo_personaje);
+
+
+        Boolean newPj = getIntent().getBooleanExtra("new", true);
+        Personaje pj = (Personaje) getIntent().getSerializableExtra("pj");
 
         spClase = findViewById(R.id.spClase);
         spRaza = findViewById(R.id.spRaza);
@@ -73,8 +79,11 @@ public class NuevoPersonajeActivity extends AppCompatActivity {
         btCompletarPersonaje.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                insertData();
+                if (newPj) {
+                    insertData();
+                } else {
+                    updateData();
+                }
 
                 // DatabaseReference newPost=mRef.push();
 
@@ -97,7 +106,11 @@ public class NuevoPersonajeActivity extends AppCompatActivity {
 
 
             }
+
         });
+    }
+
+    private void updateData() {
     }
 
     private void insertData() {

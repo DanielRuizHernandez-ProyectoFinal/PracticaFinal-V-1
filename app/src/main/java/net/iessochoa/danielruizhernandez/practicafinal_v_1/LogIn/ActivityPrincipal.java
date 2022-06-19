@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,12 +28,13 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import net.iessochoa.danielruizhernandez.practicafinal_v_1.Adapter.PersonajeAdapter;
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.Model.Personaje;
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.R;
 
 import java.util.ArrayList;
 
-public class ActivityPrincipal extends AppCompatActivity {
+public class ActivityPrincipal extends AppCompatActivity implements PersonajeAdapter.OnItemClickListener {
 
 
     private FirebaseAuth mAuth;
@@ -50,11 +52,14 @@ public class ActivityPrincipal extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
 
         recyclerView = findViewById(R.id.id_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         btAnyadir = findViewById(R.id.fabAnyadir);
 
 
         btAnyadir.setOnClickListener(e -> nuevoPersonaje());
+
+        personajeArrayListl = new ArrayList<>();
 
        /* DocumentReference documentReference = fStore.collection("users").document(userId);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
@@ -69,22 +74,30 @@ public class ActivityPrincipal extends AppCompatActivity {
         ;
         */
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         fStore.collection("personajes").whereEqualTo("usuario", mAuth.getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 Toast.makeText(ActivityPrincipal.this, "ACABOO", Toast.LENGTH_SHORT).show();
                 if (task.isSuccessful()) {
+                    personajeArrayListl = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d("CAPAPAPA", "olaaa");
-                      //  document.getData().get()
-                        Personaje personaje = new Personaje(document.getData().get("nombre").toString(),document.getData().get("clase").toString(),document.getData().get("raza").toString(),document.getData().get("nivel").toString(),document.getData().get("inventario").toString(),document.getData().get("usuario").toString());
+                        //  document.getData().get()
+                        Personaje personaje = new Personaje(document.getData().get("nombre").toString(), document.getData().get("clase").toString(), document.getData().get("raza").toString(), document.getData().get("nivel").toString(), document.getData().get("inventario").toString(), document.getData().get("usuario").toString());
                         personajeArrayListl.add(personaje);
-
                     }
+                    PersonajeAdapter a = new PersonajeAdapter(ActivityPrincipal.this, personajeArrayListl);
+                    recyclerView.setAdapter(a);
                 }
             }
         });
-
     }
 
     private void nuevoPersonaje() {
@@ -112,5 +125,14 @@ public class ActivityPrincipal extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public void onClick(int position) {
+        Toast.makeText(this, position+"", Toast.LENGTH_SHORT).show();
+        Intent intent=  new Intent(this,NuevoPersonajeActivity.class);
+        intent.putExtra("new",true);
+        intent.putExtra("pj",personajeArrayListl.get(position));
+        startActivity(intent);
     }
 }

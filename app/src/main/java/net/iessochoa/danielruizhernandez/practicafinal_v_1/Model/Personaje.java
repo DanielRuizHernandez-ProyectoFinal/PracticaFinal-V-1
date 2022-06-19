@@ -1,6 +1,8 @@
 package net.iessochoa.danielruizhernandez.practicafinal_v_1.Model;
 
-public class Personaje {
+import java.io.Serializable;
+
+public class Personaje implements Serializable {
 
     String nombre;
     String clase;
