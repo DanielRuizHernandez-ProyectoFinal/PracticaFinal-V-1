@@ -30,21 +30,18 @@
             android:id="@+id/tvNombreJugador"
             android:layout_width="0dp"
             android:layout_height="19dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:text="Nombre jugador"
             card_view:layout_constraintEnd_toStartOf="@+id/btBorrar"
-            card_view:layout_constraintStart_toEndOf="@+id/icono"
-            card_view:layout_constraintTop_toTopOf="@+id/icono" />
+            card_view:layout_constraintStart_toEndOf="@+id/ivImagenPersonaje"
+            card_view:layout_constraintTop_toTopOf="@+id/ivImagenPersonaje" />
 
         <TextView
             android:id="@+id/tvNombrePersonaje"
             android:layout_width="0dp"
             android:layout_height="19dp"
-            android:layout_marginStart="8dp"
             android:text="Nombre del personaje"
             card_view:layout_constraintEnd_toEndOf="@+id/tvNombreJugador"
-            card_view:layout_constraintStart_toEndOf="@+id/icono"
+            card_view:layout_constraintStart_toEndOf="@+id/ivImagenPersonaje"
             card_view:layout_constraintTop_toBottomOf="@+id/tvNombreJugador" />
 
         <Button

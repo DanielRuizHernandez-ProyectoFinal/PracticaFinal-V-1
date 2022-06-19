@@ -1,8 +1,8 @@
 package net.iessochoa.danielruizhernandez.practicafinal_v_1.LogIn;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -11,8 +11,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -20,7 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 
-import net.iessochoa.danielruizhernandez.practicafinal_v_1.Model.PersonajeModel;
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.R;
 
 import java.util.HashMap;
@@ -53,8 +50,9 @@ public class NuevoPersonajeActivity extends AppCompatActivity {
         mtInventario = findViewById(R.id.mtInventario);
 
         mDatabase = FirebaseDatabase.getInstance();
-        mRef=FirebaseDatabase.getInstance().getReference().child("personajes");
-        db=FirebaseFirestore.getInstance();
+        mRef = FirebaseDatabase.getInstance().getReference().child("personajes");
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         //     userID=mAuth.getUid();
 
@@ -109,19 +107,25 @@ public class NuevoPersonajeActivity extends AppCompatActivity {
         String raza = spRaza.getSelectedItem().toString();
         String nivel = spNivel.getSelectedItem().toString();
         String inventario = mtInventario.getText().toString();
+        String usuario = mAuth.getCurrentUser().getEmail();
 
+        Map<String, Object> map = new HashMap<>();
+        map.put("nombre", nombre);
+        map.put("clase", clase);
+        map.put("raza", raza);
+        map.put("nivel", nivel);
+        map.put("inventario", inventario);
+        map.put("usuario", usuario);
 
-        Map<String,Object> map = new HashMap<>();
-        map.put("nombre",nombre);
-        map.put("clase",clase);
-        map.put("raza",raza);
-        map.put("nivel",nivel);
-        map.put("inventario",inventario);
+        if (nombre.isEmpty()) {
 
+            Toast.makeText(this, "Falta el nombre", Toast.LENGTH_SHORT).show();
+        } else {
+            db.collection("personajes").document().set(map);
+            Toast.makeText(this, "Personaje creado", Toast.LENGTH_SHORT).show();
 
-        db.collection("personajes").document().set(map);
-        Toast.makeText(this, "Personaje creado", Toast.LENGTH_SHORT).show();
-
+            finish();
+        }
 
     }
 }
