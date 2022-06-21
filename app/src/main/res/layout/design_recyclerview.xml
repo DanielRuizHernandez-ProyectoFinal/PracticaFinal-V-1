@@ -28,10 +28,10 @@
             tools:ignore="ImageContrastCheck" />
 
         <TextView
-            android:id="@+id/tvNombreJugador"
+            android:id="@+id/tvNivel"
             android:layout_width="0dp"
             android:layout_height="19dp"
-            android:text="Nombre jugador"
+            android:text="Nivel"
             card_view:layout_constraintEnd_toStartOf="@+id/btBorrar"
             card_view:layout_constraintStart_toEndOf="@+id/ivImagenPersonaje"
             card_view:layout_constraintTop_toTopOf="@+id/ivImagenPersonaje" />
@@ -41,9 +41,9 @@
             android:layout_width="0dp"
             android:layout_height="19dp"
             android:text="Nombre del personaje"
-            card_view:layout_constraintEnd_toEndOf="@+id/tvNombreJugador"
+            card_view:layout_constraintEnd_toEndOf="@+id/tvNivel"
             card_view:layout_constraintStart_toEndOf="@+id/ivImagenPersonaje"
-            card_view:layout_constraintTop_toBottomOf="@+id/tvNombreJugador" />
+            card_view:layout_constraintTop_toBottomOf="@+id/tvNivel" />
 
         <Button
             android:id="@+id/btBorrar"
@@ -54,7 +54,8 @@
             card_view:icon="@android:drawable/ic_menu_delete"
             card_view:layout_constraintBottom_toBottomOf="@+id/icono"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UnknownId" />
 
         <TextView
             android:id="@+id/tvClasePersonaje"

@@ -22,6 +22,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.Model.Personaje;
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.R;
 
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +33,7 @@ public class NuevoPersonajeActivity extends AppCompatActivity {
     private TextInputLayout etNombreNuevoPersonaje;
     private Button btCompletarPersonaje;
     private EditText mtInventario;
+    private EditText txtNombre;
     FirebaseStorage mStorage;
     DatabaseReference mRef;
     FirebaseDatabase mDatabase;
@@ -48,21 +51,24 @@ public class NuevoPersonajeActivity extends AppCompatActivity {
         Boolean newPj = getIntent().getBooleanExtra("new", true);
         Personaje pj = (Personaje) getIntent().getSerializableExtra("pj");
 
+
         spClase = findViewById(R.id.spClase);
         spRaza = findViewById(R.id.spRaza);
         spNivel = findViewById(R.id.spNivel);
         etNombreNuevoPersonaje = findViewById(R.id.etNombreNuevoPersonaje);
         btCompletarPersonaje = findViewById(R.id.btCompletarPersonaje);
         mtInventario = findViewById(R.id.mtInventario);
+        txtNombre=findViewById(R.id.txtNombrePersonaje);
+
+
 
         mDatabase = FirebaseDatabase.getInstance();
         mRef = FirebaseDatabase.getInstance().getReference().child("personajes");
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        //     userID=mAuth.getUid();
 
-        String[] opcionesClase = {"Guerrero", "Brujo", "Clérigo", "Picaro", "Barbaro", "Explorador", "Mago"};
+        String[] opcionesClase = {"Guerrero", "Brujo", "Clérigo", "Picaro", "Barbaro", "Explorador", "Mago", "Hechicero", "Druida", "Paladin"};
         String[] opcionesRaza = {"Humano", "Enano", "Mediano", "Elfo", "Semiorco", "Draconido"};
         String[] opcionesNivel = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"};
 
@@ -76,33 +82,24 @@ public class NuevoPersonajeActivity extends AppCompatActivity {
         spNivel.setAdapter(arrayAdapterOpcionesNivel);
 
 
+        if (pj!=null){
+            String nombrePersonaje= pj.getNombre();
+            etNombreNuevoPersonaje.getEditText().setText(nombrePersonaje);
+            spClase.setSelection(arrayAdapterOpcionesClase.getPosition(pj.getClase()));
+            spNivel.setSelection(arrayAdapterOpcionesNivel.getPosition(pj.getNivel()));
+            spRaza.setSelection(arrayAdapterOpcionesRaza.getPosition(pj.getRaza()));
+            mtInventario.setText(pj.getInventario());
+
+        }
+
         btCompletarPersonaje.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (newPj) {
                     insertData();
                 } else {
-                    updateData();
+                    updateData(pj);
                 }
-
-                // DatabaseReference newPost=mRef.push();
-
-                /*
-                HashMap objetosNuevoPersonaje= new HashMap();
-
-                objetosNuevoPersonaje.put("clase",clase);
-                objetosNuevoPersonaje.put("raza",raza);
-                objetosNuevoPersonaje.put("nivel",nivel);
-
-                 */
-
-             /*
-             newPost.child("nombrepersonaje").setValue(etNombreNuevoPersonaje.getEditText());
-                newPost.child("clase").setValue(clase);
-                newPost.child("raza").setValue(raza);
-                newPost.child("nivel").setValue(nivel);
-
-              */
 
 
             }
@@ -110,7 +107,9 @@ public class NuevoPersonajeActivity extends AppCompatActivity {
         });
     }
 
-    private void updateData() {
+    private void updateData(Personaje pj) {
+
+
     }
 
     private void insertData() {
@@ -123,15 +122,15 @@ public class NuevoPersonajeActivity extends AppCompatActivity {
         String usuario = mAuth.getCurrentUser().getEmail();
 
         Map<String, Object> map = new HashMap<>();
+        map.put("usuario", usuario);
         map.put("nombre", nombre);
         map.put("clase", clase);
         map.put("raza", raza);
         map.put("nivel", nivel);
         map.put("inventario", inventario);
-        map.put("usuario", usuario);
+
 
         if (nombre.isEmpty()) {
-
             Toast.makeText(this, "Falta el nombre", Toast.LENGTH_SHORT).show();
         } else {
             db.collection("personajes").document().set(map);

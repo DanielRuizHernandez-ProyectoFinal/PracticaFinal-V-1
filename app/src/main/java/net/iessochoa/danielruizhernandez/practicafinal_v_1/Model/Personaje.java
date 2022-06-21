@@ -4,26 +4,28 @@ import java.io.Serializable;
 
 public class Personaje implements Serializable {
 
+
     String nombre;
     String clase;
     String raza;
     String nivel;
     String inventario;
     String usuario;
+    String id;
 
 
     public Personaje() {
     }
 
 
-
-    public Personaje(String nombre, String clase, String raza, String nivel, String inventario, String usuario) {
+    public Personaje(String nombre, String clase, String raza, String nivel, String inventario, String usuario, String idPersonaje) {
         this.nombre = nombre;
         this.clase = clase;
         this.raza = raza;
         this.nivel = nivel;
         this.inventario = inventario;
         this.usuario = usuario;
+        this.id = idPersonaje;
     }
 
     public String getNombre() {
@@ -73,4 +75,13 @@ public class Personaje implements Serializable {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }

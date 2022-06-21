@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,6 +45,7 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
     private FirebaseFirestore fStore;
     private RecyclerView recyclerView;
     private ArrayList<Personaje> personajeArrayListl;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,7 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
 
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -89,8 +94,8 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
                     personajeArrayListl = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d("CAPAPAPA", "olaaa");
-                        //  document.getData().get()
-                        Personaje personaje = new Personaje(document.getData().get("nombre").toString(), document.getData().get("clase").toString(), document.getData().get("raza").toString(), document.getData().get("nivel").toString(), document.getData().get("inventario").toString(), document.getData().get("usuario").toString());
+                        String idPersonaje = document.getId();
+                        Personaje personaje = new Personaje(document.getData().get("nombre").toString(), document.getData().get("clase").toString(), document.getData().get("raza").toString(), document.getData().get("nivel").toString(), document.getData().get("inventario").toString(), document.getData().get("usuario").toString(), idPersonaje);
                         personajeArrayListl.add(personaje);
                     }
                     PersonajeAdapter a = new PersonajeAdapter(ActivityPrincipal.this, personajeArrayListl);
@@ -129,10 +134,37 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
 
     @Override
     public void onClick(int position) {
-        Toast.makeText(this, position+"", Toast.LENGTH_SHORT).show();
-        Intent intent=  new Intent(this,NuevoPersonajeActivity.class);
-        intent.putExtra("new",true);
-        intent.putExtra("pj",personajeArrayListl.get(position));
+        Toast.makeText(this, position + "", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, NuevoPersonajeActivity.class);
+        intent.putExtra("new", true);
+        intent.putExtra("pj", personajeArrayListl.get(position));
         startActivity(intent);
+
     }
+
+    @Override
+    public void onDeleteClick(int position) {
+
+        String variable = personajeArrayListl.get(position).getId();
+
+
+        DocumentReference document = fStore.collection("personajes").document(variable);
+        if (document != null) {
+            document.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        personajeArrayListl.remove(personajeArrayListl.get(position));
+                        Toast.makeText(ActivityPrincipal.this, "Borrado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }
+
+
+    }
+
 }
+
