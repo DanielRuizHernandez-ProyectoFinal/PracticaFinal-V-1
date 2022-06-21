@@ -48,4 +48,14 @@ public class Usuario {
     public void setTeléfono(String teléfono) {
         Teléfono = teléfono;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "Nombre='" + Nombre + '\'' +
+                ", Correo='" + Correo + '\'' +
+                ", Contraseña='" + Contraseña + '\'' +
+                ", Teléfono='" + Teléfono + '\'' +
+                '}';
+    }
 }

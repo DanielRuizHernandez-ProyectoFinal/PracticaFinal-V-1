@@ -107,6 +107,7 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
 
     private void nuevoPersonaje() {
         Intent i = new Intent(this, NuevoPersonajeActivity.class);
+        i.putExtra("newPj", true);
         startActivity(i);
     }
 
@@ -136,7 +137,7 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
     public void onClick(int position) {
         Toast.makeText(this, position + "", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, NuevoPersonajeActivity.class);
-        intent.putExtra("new", true);
+        intent.putExtra("newPj", false);
         intent.putExtra("pj", personajeArrayListl.get(position));
         startActivity(intent);
 

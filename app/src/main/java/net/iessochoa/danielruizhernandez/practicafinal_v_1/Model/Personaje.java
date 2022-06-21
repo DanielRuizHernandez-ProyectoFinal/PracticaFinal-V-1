@@ -84,4 +84,15 @@ public class Personaje implements Serializable {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return "Personaje{" +
+                "nombre='" + nombre + '\'' +
+                ", clase='" + clase + '\'' +
+                ", raza='" + raza + '\'' +
+                ", nivel='" + nivel + '\'' +
+                ", inventario='" + inventario + '\'' +
+                ", usuario='" + usuario + '\'' +
+                '}';
+    }
 }
