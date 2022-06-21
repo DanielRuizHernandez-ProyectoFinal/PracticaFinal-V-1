@@ -144,34 +144,6 @@ public class NuevoPersonajeActivity extends AppCompatActivity {
 
             }
         });
-        /*
-
-        fStore= FirebaseFirestore.getInstance();
-
-        fStore.collection("users").document(userId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-
-                Usuario usuarioActual = documentSnapshot.toObject(Usuario.class);
-
-                usuarioActual.setNombre(nombre);
-                usuarioActual.setCorreo(correo);
-                usuarioActual.setContraseña(contrasenya);
-                usuarioActual.setTeléfono(telefono);
-
-                fStore.collection("users").document(userId).set(usuarioActual).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(EditProfileActivity.this, "Cambios guardados", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                });
-            }
-        });
-
-         */
 
     }
 

@@ -65,19 +65,6 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
 
         personajeArrayListl = new ArrayList<>();
 
-       /* DocumentReference documentReference = fStore.collection("users").document(userId);
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                etNombre.setText(documentSnapshot.getString("nombre"));
-                etCorreo.setText(documentSnapshot.getString("correo"));
-                etTelefono.setText(documentSnapshot.getString("teléfono"));
-                etContrasenya.setText(documentSnapshot.getString("contraseña"));
-            }
-        });
-        ;
-        */
-
 
     }
 
