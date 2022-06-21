@@ -1,4 +1,4 @@
-package net.iessochoa.danielruizhernandez.practicafinal_v_1.LogIn;
+package net.iessochoa.danielruizhernandez.practicafinal_v_1.Activities;
 
 
 import android.content.Intent;

@@ -1,12 +1,12 @@
 package net.iessochoa.danielruizhernandez.practicafinal_v_1.Adapter;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStructure;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,30 +15,25 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import net.iessochoa.danielruizhernandez.practicafinal_v_1.LogIn.NuevoPersonajeActivity;
-import net.iessochoa.danielruizhernandez.practicafinal_v_1.LogIn.RegisterActivity;
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.Model.Personaje;
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.R;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
-public class PersonajeAdapter extends RecyclerView.Adapter<PersonajeAdapter.ViewHolder> {
+public class PersonajeAdapter extends RecyclerView.Adapter<PersonajeAdapter.ViewHolder> implements Filterable {
 
     private final OnItemClickListener listener;
     private ArrayList<Personaje> arrayList;
+    private ArrayList<Personaje> arrayListBuscarEntera;
     FirebaseFirestore mFirestore;
     FirebaseAuth mAuth;
+
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -80,11 +75,14 @@ public class PersonajeAdapter extends RecyclerView.Adapter<PersonajeAdapter.View
 
     }
 
-    public PersonajeAdapter(PersonajeAdapter.OnItemClickListener listener, ArrayList<Personaje> dataSet) {
-        arrayList = dataSet;
+    public PersonajeAdapter(PersonajeAdapter.OnItemClickListener listener, ArrayList<Personaje> arrayList) {
+        this.arrayList = arrayList;
         this.listener = listener;
         mFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        arrayListBuscarEntera = new ArrayList<>(arrayList);
+
+
     }
 
     @NonNull
@@ -143,5 +141,39 @@ public class PersonajeAdapter extends RecyclerView.Adapter<PersonajeAdapter.View
 
     }
 
+    public Filter getFilter(){
+        return  arrayListBuscar;
+    }
+
+    private Filter arrayListBuscar=new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Personaje> personajesFiltrados=new ArrayList<>();
+            if (constraint==null || constraint.length()==0){
+                personajesFiltrados.addAll(arrayListBuscarEntera);
+                
+            }else {
+                String filter = constraint.toString().toLowerCase(Locale.ROOT).trim();
+
+                for (Personaje item:arrayListBuscarEntera) {
+                    if (item.getNombre().toLowerCase().contains(filter)){
+                        personajesFiltrados.add(item);
+                    }
+                    
+                }
+            }
+            FilterResults results=new FilterResults();
+            results.values=personajesFiltrados;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            arrayList.clear();
+            arrayList.addAll((List)results.values);
+            notifyDataSetChanged();
+        }
+    };
 
 }

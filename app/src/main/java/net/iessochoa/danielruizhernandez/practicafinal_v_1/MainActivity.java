@@ -8,8 +8,8 @@ import android.os.Bundle;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import net.iessochoa.danielruizhernandez.practicafinal_v_1.LogIn.LoginActivity;
-import net.iessochoa.danielruizhernandez.practicafinal_v_1.LogIn.ActivityPrincipal;
+import net.iessochoa.danielruizhernandez.practicafinal_v_1.Activities.LoginActivity;
+import net.iessochoa.danielruizhernandez.practicafinal_v_1.Activities.ActivityPrincipal;
 
 public class MainActivity extends AppCompatActivity {
 

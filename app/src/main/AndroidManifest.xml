@@ -10,23 +10,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PracticaFinalV1">
 
-       <activity android:name=".LogIn.NuevoPersonajeActivity"
+       <activity android:name=".Activities.NuevoPersonajeActivity"
            android:label="Creacion de personaje"
            />
 
         <activity
-            android:name=".LogIn.EditProfileActivity"
+            android:name=".Activities.EditProfileActivity"
             android:exported="true"
             android:label="Editar perfil" />
         <activity
-            android:name=".LogIn.ActivityPrincipal"
+            android:name=".Activities.ActivityPrincipal"
             android:exported="true"
-            android:label="DnD Administrador" />
+             />
         <activity
-            android:name=".LogIn.RegisterActivity"
+            android:name=".Activities.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".LogIn.LoginActivity"
+            android:name=".Activities.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
