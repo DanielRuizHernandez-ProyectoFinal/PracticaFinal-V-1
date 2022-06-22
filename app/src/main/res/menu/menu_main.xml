@@ -13,9 +13,17 @@
         app:showAsAction="never"/>
 
     <item android:id="@+id/action_buscar"
-        android:title="Buscar"
+        android:title="Buscar por nombre"
         app:showAsAction="collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
+    <item android:id="@+id/mostrarTodos"
+        android:title="Mostrar todos los personajes"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/mostrarMisPersonajes"
+        android:title="Mostrar tus personajes"
+        app:showAsAction="never"/>
 
 
 

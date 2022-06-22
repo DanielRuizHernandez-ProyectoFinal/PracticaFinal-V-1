@@ -19,22 +19,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-
-
-    }
-
-
-
-    //Login
-    @Override
-    protected void onStart() {
-        super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null) {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         } else {
             startActivity(new Intent(MainActivity.this, ActivityPrincipal.class));
         }
+        finish();
     }
 
 

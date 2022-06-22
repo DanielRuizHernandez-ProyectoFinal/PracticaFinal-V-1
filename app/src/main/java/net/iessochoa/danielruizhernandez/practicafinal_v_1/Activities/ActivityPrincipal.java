@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -30,6 +31,7 @@ import net.iessochoa.danielruizhernandez.practicafinal_v_1.Model.Personaje;
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityPrincipal extends AppCompatActivity implements PersonajeAdapter.OnItemClickListener {
 
@@ -67,7 +69,6 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
         fStore.collection("personajes").whereEqualTo("usuario", mAuth.getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                Toast.makeText(ActivityPrincipal.this, "Base de datos cargada", Toast.LENGTH_SHORT).show();
                 if (task.isSuccessful()) {
                     personajeArrayList = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
@@ -137,15 +138,65 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
         switch (item.getItemId()) {
             case R.id.itLogOut:
                 mAuth.signOut();
+                Intent intent2=new Intent(this,LoginActivity.class);
+                startActivity(intent2);
                 finish();
                 break;
             case R.id.itEditarPerfil:
                 Intent intent = new Intent(this, EditProfileActivity.class);
                 startActivity(intent);
                 break;
-
+            case R.id.mostrarTodos:
+                mostrarTodos();
+                break;
+            case R.id.mostrarMisPersonajes:
+                mostrarMisPersonajes();
+                break;
         }
         return true;
+    }
+
+    private void mostrarMisPersonajes() {
+        fStore.collection("personajes").whereEqualTo("usuario", mAuth.getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Toast.makeText(ActivityPrincipal.this, "Tus personajes", Toast.LENGTH_SHORT).show();
+                if (task.isSuccessful()) {
+                    personajeArrayList = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("CAPAPAPA", "olaaa");
+                        String idPersonaje = document.getId();
+                        Personaje personaje = new Personaje(document.getData().get("nombre").toString(), document.getData().get("clase").toString(), document.getData().get("raza").toString(), document.getData().get("nivel").toString(), document.getData().get("inventario").toString(), document.getData().get("usuario").toString(), idPersonaje);
+                        personajeArrayList.add(personaje);
+                    }
+                    PersonajeAdapter a = new PersonajeAdapter(ActivityPrincipal.this, personajeArrayList);
+                    recyclerView.setAdapter(a);
+                }
+            }
+        });
+    }
+
+    private void mostrarTodos() {
+
+        fStore.collection("personajes").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Toast.makeText(ActivityPrincipal.this, "Cargados todos los personajes", Toast.LENGTH_SHORT).show();
+                if (task.isSuccessful()) {
+                    personajeArrayList = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("CAPAPAPA", "olaaa");
+                        String idPersonaje = document.getId();
+                        Personaje personaje = new Personaje(document.getData().get("nombre").toString(), document.getData().get("clase").toString(), document.getData().get("raza").toString(), document.getData().get("nivel").toString(), document.getData().get("inventario").toString(), document.getData().get("usuario").toString(), idPersonaje);
+                        personajeArrayList.add(personaje);
+                    }
+                    PersonajeAdapter a = new PersonajeAdapter(ActivityPrincipal.this, personajeArrayList);
+                    recyclerView.setAdapter(a);
+                }
+            }
+        });
+
+
     }
 
     @Override

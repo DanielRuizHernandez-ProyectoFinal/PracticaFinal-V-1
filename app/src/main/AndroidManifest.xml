@@ -21,6 +21,7 @@
         <activity
             android:name=".Activities.ActivityPrincipal"
             android:exported="true"
+            android:label="DnD Administrador"
              />
         <activity
             android:name=".Activities.RegisterActivity"
