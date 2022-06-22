@@ -234,7 +234,6 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
 
     @Override
     public void onClick(int position) {
-        Toast.makeText(this, position + "", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, NuevoPersonajeActivity.class);
         intent.putExtra("newPj", false);
         intent.putExtra("pj", personajeArrayList.get(position));

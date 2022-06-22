@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseUser;
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.Activities.LoginActivity;
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.Activities.ActivityPrincipal;
 
-public class MainActivity extends AppCompatActivity {
+public class InicioActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
@@ -21,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null) {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            startActivity(new Intent(InicioActivity.this, LoginActivity.class));
         } else {
-            startActivity(new Intent(MainActivity.this, ActivityPrincipal.class));
+            startActivity(new Intent(InicioActivity.this, ActivityPrincipal.class));
         }
         finish();
     }

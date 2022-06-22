@@ -128,7 +128,7 @@ public class NuevoPersonajeActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(NuevoPersonajeActivity.this, "Personaje modificado", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NuevoPersonajeActivity.this, "Personaje listo", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }
