@@ -1,5 +1,7 @@
 package net.iessochoa.danielruizhernandez.practicafinal_v_1.Activities;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +30,6 @@ import net.iessochoa.danielruizhernandez.practicafinal_v_1.Model.Personaje;
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ActivityPrincipal extends AppCompatActivity implements PersonajeAdapter.OnItemClickListener {
 
@@ -39,8 +40,8 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
     private RecyclerView recyclerView;
     private ArrayList<Personaje> personajeArrayList;
 
-    private PersonajeAdapter adapter;
-    private List<Personaje> exampleList;
+
+    Menu menuBusqueda;
 
 
     @Override
@@ -56,9 +57,12 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
 
         btAnyadir = findViewById(R.id.fabAnyadir);
 
+
         btAnyadir.setOnClickListener(e -> nuevoPersonaje());
 
         personajeArrayList = new ArrayList<>();
+
+        //  adapter= new PersonajeAdapter(exampleList);
 
 
     }
@@ -71,7 +75,7 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
         fStore.collection("personajes").whereEqualTo("usuario", mAuth.getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                Toast.makeText(ActivityPrincipal.this, "ACABOO", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ActivityPrincipal.this, "Base de datos cargada", Toast.LENGTH_SHORT).show();
                 if (task.isSuccessful()) {
                     personajeArrayList = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
@@ -86,6 +90,50 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
             }
         });
     }
+
+    private void datosFiltrados(String busquedaNombre) {
+
+        if (busquedaNombre.isEmpty()){
+
+            fStore.collection("personajes").whereEqualTo("usuario", mAuth.getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    Toast.makeText(ActivityPrincipal.this, "Base de datos cargada", Toast.LENGTH_SHORT).show();
+                    if (task.isSuccessful()) {
+                        personajeArrayList = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Log.d("CAPAPAPA", "olaaa");
+                            String idPersonaje = document.getId();
+                            Personaje personaje = new Personaje(document.getData().get("nombre").toString(), document.getData().get("clase").toString(), document.getData().get("raza").toString(), document.getData().get("nivel").toString(), document.getData().get("inventario").toString(), document.getData().get("usuario").toString(), idPersonaje);
+                            personajeArrayList.add(personaje);
+                        }
+                        PersonajeAdapter a = new PersonajeAdapter(ActivityPrincipal.this, personajeArrayList);
+                        recyclerView.setAdapter(a);
+                    }
+                }
+            });
+
+        }else {
+            fStore.collection("personajes").whereEqualTo("nombre", busquedaNombre).whereEqualTo("usuario", mAuth.getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    Toast.makeText(ActivityPrincipal.this, "Buscando", Toast.LENGTH_SHORT).show();
+                    if (task.isSuccessful()) {
+                        personajeArrayList = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Log.d("CAPAPAPA", "olaaa");
+                            String idPersonaje = document.getId();
+                            Personaje personaje = new Personaje(document.getData().get("nombre").toString(), document.getData().get("clase").toString(), document.getData().get("raza").toString(), document.getData().get("nivel").toString(), document.getData().get("inventario").toString(), document.getData().get("usuario").toString(), idPersonaje);
+                            personajeArrayList.add(personaje);
+                        }
+                        PersonajeAdapter a = new PersonajeAdapter(ActivityPrincipal.this, personajeArrayList);
+                        recyclerView.setAdapter(a);
+                    }
+                }
+            });
+        }
+    }
+
 
     private void nuevoPersonaje() {
         Intent i = new Intent(this, NuevoPersonajeActivity.class);
@@ -104,6 +152,7 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
                 Intent intent = new Intent(this, EditProfileActivity.class);
                 startActivity(intent);
                 break;
+
         }
         return true;
     }
@@ -113,22 +162,35 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
 
-        MenuItem seachIte = menu.findItem(R.id.action_buscar);
-        SearchView searchView = (SearchView) seachIte.getActionView();
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_buscar)
+                .getActionView();
+        if (null != searchView) {
+            searchView.setSearchableInfo(searchManager
+                    .getSearchableInfo(getComponentName()));
+            searchView.setIconifiedByDefault(false);
+        }
 
-            @Override
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
             public boolean onQueryTextChange(String newText) {
+                // This is your adapter that will be filtered
+                datosFiltrados(newText);
+                return true;
+            }
+
+            public boolean onQueryTextSubmit(String query) {
+                // **Here you can get the value "query" which is entered in the search box.**
+                datosFiltrados(query);
 
                 return false;
             }
-        });
-        return true;
+        };
+
+        searchView.setOnQueryTextListener(queryTextListener);
+
+        return super.onCreateOptionsMenu(menu);
+
     }
 
     @Override

@@ -26,9 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class PersonajeAdapter extends RecyclerView.Adapter<PersonajeAdapter.ViewHolder> implements Filterable {
+public class PersonajeAdapter extends RecyclerView.Adapter<PersonajeAdapter.ViewHolder> {
 
-    private final OnItemClickListener listener;
+    private OnItemClickListener listener;
     private ArrayList<Personaje> arrayList;
     private ArrayList<Personaje> arrayListBuscarEntera;
     FirebaseFirestore mFirestore;
@@ -80,10 +80,11 @@ public class PersonajeAdapter extends RecyclerView.Adapter<PersonajeAdapter.View
         this.listener = listener;
         mFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        arrayListBuscarEntera = new ArrayList<>(arrayList);
 
 
     }
+
+
 
     @NonNull
     @Override
@@ -141,39 +142,5 @@ public class PersonajeAdapter extends RecyclerView.Adapter<PersonajeAdapter.View
 
     }
 
-    public Filter getFilter(){
-        return  arrayListBuscar;
-    }
-
-    private Filter arrayListBuscar=new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<Personaje> personajesFiltrados=new ArrayList<>();
-            if (constraint==null || constraint.length()==0){
-                personajesFiltrados.addAll(arrayListBuscarEntera);
-                
-            }else {
-                String filter = constraint.toString().toLowerCase(Locale.ROOT).trim();
-
-                for (Personaje item:arrayListBuscarEntera) {
-                    if (item.getNombre().toLowerCase().contains(filter)){
-                        personajesFiltrados.add(item);
-                    }
-                    
-                }
-            }
-            FilterResults results=new FilterResults();
-            results.values=personajesFiltrados;
-
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            arrayList.clear();
-            arrayList.addAll((List)results.values);
-            notifyDataSetChanged();
-        }
-    };
 
 }

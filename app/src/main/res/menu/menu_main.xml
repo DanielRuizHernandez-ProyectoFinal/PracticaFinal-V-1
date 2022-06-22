@@ -5,8 +5,8 @@
     <item
         android:id="@+id/itLogOut"
         android:icon="@drawable/ic_log_out"
-        android:title="@string/logout"
-        app:showAsAction="ifRoom" />
+        android:title="Hacer logout"
+        app:showAsAction="never" />
     <item
         android:id="@+id/itEditarPerfil"
         android:title="Editar perfil"
