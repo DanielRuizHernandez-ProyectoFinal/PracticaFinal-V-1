@@ -40,10 +40,6 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
     private RecyclerView recyclerView;
     private ArrayList<Personaje> personajeArrayList;
 
-
-    Menu menuBusqueda;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +55,6 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
 
 
         btAnyadir.setOnClickListener(e -> nuevoPersonaje());
-
-        personajeArrayList = new ArrayList<>();
-
-        //  adapter= new PersonajeAdapter(exampleList);
 
 
     }
@@ -93,8 +85,7 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
 
     private void datosFiltrados(String busquedaNombre) {
 
-        if (busquedaNombre.isEmpty()){
-
+        if (busquedaNombre.isEmpty()) {
             fStore.collection("personajes").whereEqualTo("usuario", mAuth.getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -113,7 +104,7 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
                 }
             });
 
-        }else {
+        } else {
             fStore.collection("personajes").whereEqualTo("nombre", busquedaNombre).whereEqualTo("usuario", mAuth.getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -174,15 +165,12 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
 
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
             public boolean onQueryTextChange(String newText) {
-                // This is your adapter that will be filtered
                 datosFiltrados(newText);
                 return true;
             }
 
             public boolean onQueryTextSubmit(String query) {
-                // **Here you can get the value "query" which is entered in the search box.**
                 datosFiltrados(query);
-
                 return false;
             }
         };
@@ -207,7 +195,6 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
     public void onDeleteClick(int position) {
 
         String variable = personajeArrayList.get(position).getId();
-
 
         DocumentReference document = fStore.collection("personajes").document(variable);
         if (document != null) {
