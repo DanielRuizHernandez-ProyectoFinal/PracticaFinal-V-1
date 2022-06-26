@@ -109,7 +109,6 @@ public class ActivityPrincipal extends AppCompatActivity implements PersonajeAda
             fStore.collection("personajes").whereEqualTo("nombre", busquedaNombre).whereEqualTo("usuario", mAuth.getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    Toast.makeText(ActivityPrincipal.this, "Buscando", Toast.LENGTH_SHORT).show();
                     if (task.isSuccessful()) {
                         personajeArrayList = new ArrayList<>();
                         for (QueryDocumentSnapshot document : task.getResult()) {
