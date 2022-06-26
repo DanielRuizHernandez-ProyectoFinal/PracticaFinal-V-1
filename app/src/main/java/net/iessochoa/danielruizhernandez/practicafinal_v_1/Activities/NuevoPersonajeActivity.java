@@ -113,7 +113,7 @@ public class NuevoPersonajeActivity extends AppCompatActivity {
                 Personaje personaje= documentSnapshot.toObject(Personaje.class);
 
                 personaje.setNombre(etNombreNuevoPersonaje.getEditText().getText().toString());
-                personaje.setClase(spRaza.getSelectedItem().toString());
+                personaje.setClase(spClase.getSelectedItem().toString());
                 personaje.setRaza(spRaza.getSelectedItem().toString());
                 personaje.setInventario(mtInventario.getText().toString());
                 personaje.setNivel(spNivel.getSelectedItem().toString());
