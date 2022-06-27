@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/purple_200"
-    tools:context=".Activities.NuevoPersonajeActivity">
+    tools:context=".ui.NuevoPersonajeActivity">
 
     <Spinner
         android:id="@+id/spNivel"
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Completar personaje" />
+            android:text="@string/completar_personaje" />
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -78,7 +78,7 @@
         android:layout_marginStart="42dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="50dp"
-        android:hint="Nombre del personaje"
+        android:hint="@string/nombre_del_personaje"
         app:endIconDrawable="@drawable/custom_person_icon"
         app:endIconMode="none"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +98,7 @@
         android:layout_width="362dp"
         android:layout_height="28dp"
         android:background="@color/white"
-        android:text="Aqui podrás poner tu inventario "
+        android:text="@string/aqui_podr_s_poner_tu_inventario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spNivel" />

@@ -1,4 +1,4 @@
-package net.iessochoa.danielruizhernandez.practicafinal_v_1.Activities;
+package net.iessochoa.danielruizhernandez.practicafinal_v_1.ui;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -21,7 +21,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -31,7 +30,6 @@ import net.iessochoa.danielruizhernandez.practicafinal_v_1.Model.Personaje;
 import net.iessochoa.danielruizhernandez.practicafinal_v_1.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ActivityPrincipal extends AppCompatActivity implements PersonajeAdapter.OnItemClickListener {
 

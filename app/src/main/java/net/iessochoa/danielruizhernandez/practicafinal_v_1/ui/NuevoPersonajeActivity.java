@@ -1,4 +1,4 @@
-package net.iessochoa.danielruizhernandez.practicafinal_v_1.Activities;
+package net.iessochoa.danielruizhernandez.practicafinal_v_1.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,12 +34,9 @@ public class NuevoPersonajeActivity extends AppCompatActivity {
     private TextInputLayout etNombreNuevoPersonaje;
     private Button btCompletarPersonaje;
     private EditText mtInventario;
-    private EditText txtNombre;
-    FirebaseStorage mStorage;
     DatabaseReference mRef;
     FirebaseDatabase mDatabase;
     FirebaseFirestore db;
-    private String userId;
     private FirebaseAuth mAuth;
 
 
@@ -59,7 +56,6 @@ public class NuevoPersonajeActivity extends AppCompatActivity {
         etNombreNuevoPersonaje = findViewById(R.id.etNombreNuevoPersonaje);
         btCompletarPersonaje = findViewById(R.id.btCompletarPersonaje);
         mtInventario = findViewById(R.id.mtInventario);
-        txtNombre = findViewById(R.id.txtNombrePersonaje);
 
 
         mDatabase = FirebaseDatabase.getInstance();

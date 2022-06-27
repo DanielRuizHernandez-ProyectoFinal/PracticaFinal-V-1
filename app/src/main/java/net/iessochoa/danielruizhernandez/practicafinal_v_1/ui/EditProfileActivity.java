@@ -1,4 +1,4 @@
-package net.iessochoa.danielruizhernandez.practicafinal_v_1.Activities;
+package net.iessochoa.danielruizhernandez.practicafinal_v_1.ui;
 
 import android.os.Bundle;
 import android.view.View;
@@ -29,7 +29,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
-    private DatabaseReference mDatabase;
     private Button btGuardar , btSalir;
     private EditText etNombre, etCorreo, etTelefono, etContrasenya;
     String userId;
@@ -47,7 +46,6 @@ public class EditProfileActivity extends AppCompatActivity {
         btSalir=findViewById(R.id.btSalir);
 
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
         fStore = FirebaseFirestore.getInstance();
 
         userId = mAuth.getCurrentUser().getUid();

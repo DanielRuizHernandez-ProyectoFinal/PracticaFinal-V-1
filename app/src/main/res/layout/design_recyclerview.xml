@@ -21,7 +21,7 @@
             android:layout_height="58dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:contentDescription="Icono personaje"
+            android:contentDescription="@string/icono_personaje"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
             card_view:srcCompat="@drawable/ic_launcher_foreground"
@@ -31,7 +31,7 @@
             android:id="@+id/tvNivel"
             android:layout_width="0dp"
             android:layout_height="19dp"
-            android:text="Nivel"
+            android:text="@string/nivel"
             card_view:layout_constraintEnd_toStartOf="@+id/btBorrar"
             card_view:layout_constraintStart_toEndOf="@+id/ivImagenPersonaje"
             card_view:layout_constraintTop_toTopOf="@+id/ivImagenPersonaje" />
@@ -40,7 +40,7 @@
             android:id="@+id/tvNombrePersonaje"
             android:layout_width="0dp"
             android:layout_height="19dp"
-            android:text="Nombre del personaje"
+            android:text="@string/nombre_del_personajee"
             card_view:layout_constraintEnd_toEndOf="@+id/tvNivel"
             card_view:layout_constraintStart_toEndOf="@+id/ivImagenPersonaje"
             card_view:layout_constraintTop_toBottomOf="@+id/tvNivel" />
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Clase del personaje"
+            android:text="@string/clase_del_personaje"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="@+id/tvNombrePersonaje"
             card_view:layout_constraintTop_toBottomOf="@+id/tvNombrePersonaje" />

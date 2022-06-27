@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.LoginActivity"
+    tools:context=".ui.LoginActivity"
     android:padding="16dp">
 
     <ImageView
@@ -27,7 +27,7 @@
 
         android:layout_marginTop="30dp"
         android:fontFamily="@font/montserratbold"
-        android:text="DnD Administrador"
+        android:text="@string/dnd_administrador"
         android:textColor="@color/lblPrimary"
 
 
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/montserratregular"
-        android:text="Inicia sesión para continuar"
+        android:text="@string/inicia_sesi_n_para_continuar"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
         android:drawablePadding="12dp"
         android:ems="10"
         android:fontFamily="@font/montserratregular"
-        android:hint="Correo"
+        android:hint="@string/correo"
         android:inputType="textEmailAddress"
         android:paddingStart="10dp"
 
@@ -95,7 +95,7 @@
             android:drawableStart="@drawable/custom_lock_icon"
             android:drawablePadding="10dp"
             android:fontFamily="@font/montserratregular"
-            android:hint="Contraseña"
+            android:hint="@string/contrase_a"
             android:inputType="textPassword"
             android:padding="15dp"
             android:paddingStart="10dp"
@@ -114,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/montserratregular"
-        android:text="¿Olvido Su contraseña?"
+        android:text="@string/olvido_su_contrase_a"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="@+id/txtPassword"
         app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
@@ -138,7 +138,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="20dp"
         android:textSize="15dp"
-        android:text="¿No tienes cuenta?"
+        android:text="@string/no_tienes_cuenta"
         app:layout_constraintEnd_toStartOf="@+id/lblRegister"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin"
@@ -152,7 +152,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="100dp"
         android:fontFamily="@font/montserratbold"
-        android:text="Registrate"
+        android:text="@string/registrate"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

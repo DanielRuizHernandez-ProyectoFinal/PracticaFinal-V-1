@@ -10,25 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PracticaFinalV1">
 
-       <activity android:name=".Activities.NuevoPersonajeActivity"
+       <activity android:name=".ui.NuevoPersonajeActivity"
            android:label="Creacion de personaje"
            />
 
         <activity
-            android:name=".Activities.EditProfileActivity"
+            android:name=".ui.EditProfileActivity"
             android:exported="true"
             android:label="Editar perfil" />
         <activity
-            android:name=".Activities.ActivityPrincipal"
+            android:name=".ui.ActivityPrincipal"
             android:exported="true"
             android:label="DnD Administrador"
              />
         <activity
-            android:name=".Activities.RegisterActivity"
+            android:name=".ui.RegisterActivity"
             android:label="Registro"
             android:exported="true" />
         <activity
-            android:name=".Activities.LoginActivity"
+            android:name=".ui.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity

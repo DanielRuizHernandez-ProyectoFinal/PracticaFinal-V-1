@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.RegisterActivity"
+    tools:context=".ui.RegisterActivity"
     android:padding="16dp">
 
 
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
 
         android:fontFamily="@font/montserratbold"
-        android:text="DnD Administrador"
+        android:text="@string/dnd_administradorr"
         android:textColor="@color/lblPrimary"
 
 
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/montserratregular"
-        android:text="Completa los Siguientes Datos"
+        android:text="@string/completa_los_siguientes_datos"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
         android:drawablePadding="12dp"
         android:ems="10"
         android:fontFamily="@font/montserratregular"
-        android:hint="Nombre Completo"
+        android:hint="@string/nombre_completo"
         android:inputType="textPersonName"
 
 
@@ -66,7 +66,7 @@
         android:drawablePadding="12dp"
         android:ems="10"
         android:fontFamily="@font/montserratregular"
-        android:hint="Correo"
+        android:hint="@string/correoo"
         android:inputType="textPersonName"
 
         android:paddingStart="10dp"
@@ -87,7 +87,7 @@
         android:drawablePadding="12dp"
         android:ems="10"
         android:fontFamily="@font/montserratregular"
-        android:hint="Teléfono"
+        android:hint="@string/tel_fono"
         android:inputType="phone"
 
         android:paddingStart="10dp"
@@ -121,7 +121,7 @@
             android:drawableStart="@drawable/custom_lock_icon"
             android:drawablePadding="10dp"
             android:fontFamily="@font/montserratregular"
-            android:hint="Contraseña"
+            android:hint="@string/contrase_aa"
             android:inputType="textPassword"
             android:padding="15dp"
             android:paddingStart="10dp"
@@ -137,7 +137,7 @@
         android:layout_height="55dp"
         android:layout_marginTop="25dp"
         android:fontFamily="@font/montserratbold"
-        android:text="Registrar"
+        android:text="@string/registrar"
         android:backgroundTint="@color/btnPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -149,7 +149,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginTop="15dp"
-        android:text="¿Ya tienes una cuenta?"
+        android:text="@string/ya_tienes_una_cuenta"
         android:textSize="15dp"
         app:layout_constraintEnd_toStartOf="@+id/lblLogin"
         app:layout_constraintStart_toStartOf="parent"
@@ -164,7 +164,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="100dp"
         android:fontFamily="@font/montserratbold"
-        android:text="Inicia Sesión"
+        android:text="@string/inicia_sesi_n"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
